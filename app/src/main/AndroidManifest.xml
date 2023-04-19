@@ -49,12 +49,6 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".natives.NativeAdDrawActivity"
-            android:configChanges="orientation|screenSize"
-            android:hardwareAccelerated="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
-        <activity
             android:name=".BannerActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />

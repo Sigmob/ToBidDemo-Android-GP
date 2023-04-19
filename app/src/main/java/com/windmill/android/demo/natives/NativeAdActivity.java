@@ -34,25 +34,14 @@ public class NativeAdActivity extends Activity implements AdapterView.OnItemSele
         bindButton(R.id.unified_native_ad_button, NativeAdUnifiedActivity.class);
         bindButton(R.id.unified_native_ad_list_button, NativeAdUnifiedListActivity.class);
         bindButton(R.id.unified_native_ad_recycle_button, NativeAdUnifiedRecycleActivity.class);
-//        bindButton(R.id.unified_native_ad_draw_button, NativeAdDrawActivity.class);
     }
 
     private void bindButton(@IdRes int id, final Class clz) {
         this.findViewById(id).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String placementId;
-                if (clz == NativeAdDrawActivity.class) {
-                    String[] stringArray = getResources().getStringArray(R.array.native_draw_id_value);
-                    placementId = stringArray[curPosition];
-                    if (placementId.equals("0")) {
-                        Toast.makeText(NativeAdActivity.this, "仅穿山甲、快手、优量汇支持Draw广告类型", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                } else {
-                    String[] stringArray = getResources().getStringArray(R.array.native_id_value);
-                    placementId = stringArray[curPosition];
-                }
+                String[] stringArray = getResources().getStringArray(R.array.native_id_value);
+                String placementId = stringArray[curPosition];
                 Intent intent = new Intent(NativeAdActivity.this, clz);
                 intent.putExtra("placementId", placementId);
                 startActivity(intent);
