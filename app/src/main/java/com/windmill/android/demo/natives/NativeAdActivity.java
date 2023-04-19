@@ -34,7 +34,7 @@ public class NativeAdActivity extends Activity implements AdapterView.OnItemSele
         bindButton(R.id.unified_native_ad_button, NativeAdUnifiedActivity.class);
         bindButton(R.id.unified_native_ad_list_button, NativeAdUnifiedListActivity.class);
         bindButton(R.id.unified_native_ad_recycle_button, NativeAdUnifiedRecycleActivity.class);
-        bindButton(R.id.unified_native_ad_draw_button, NativeAdDrawActivity.class);
+//        bindButton(R.id.unified_native_ad_draw_button, NativeAdDrawActivity.class);
     }
 
     private void bindButton(@IdRes int id, final Class clz) {
