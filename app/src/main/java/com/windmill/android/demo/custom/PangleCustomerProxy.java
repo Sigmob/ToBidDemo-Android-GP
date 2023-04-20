@@ -35,39 +35,36 @@ public class PangleCustomerProxy extends WMCustomAdapterProxy {
 
             Log.d(TAG, "initializeADN:" + appId);
 
-            if (!PAGSdk.isInitSuccess()) {
+            WindMillConsentStatus userGDPRConsentStatus = WindMillAd.sharedAds().getUserGDPRConsentStatus();
 
-                WindMillConsentStatus userGDPRConsentStatus = WindMillAd.sharedAds().getUserGDPRConsentStatus();
+            boolean adult = WindMillAd.sharedAds().isAdult();
 
-                boolean adult = WindMillAd.sharedAds().isAdult();
+            PAGConfig config = new PAGConfig.Builder()
+                    .appId(appId)
+                    .useTextureView(true) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
+                    .titleBarTheme(TTAdConstant.TITLE_BAR_THEME_DARK)
+                    .debugLog(true)
+                    .setChildDirected(adult ? 0 : 1)
+                    .setDoNotSell(1)
+                    .setGDPRConsent(userGDPRConsentStatus == WindMillConsentStatus.ACCEPT ? 0 : 1)
+                    .build();
 
-                PAGConfig config = new PAGConfig.Builder()
-                        .appId(appId)
-                        .useTextureView(true) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
-                        .titleBarTheme(TTAdConstant.TITLE_BAR_THEME_DARK)
-                        .debugLog(true)
-                        .setChildDirected(adult ? 0 : 1)
-                        .setDoNotSell(1)
-                        .setGDPRConsent(userGDPRConsentStatus == WindMillConsentStatus.ACCEPT ? 0 : 1)
-                        .build();
-
-                //强烈建议在应用对应的Application#onCreate()方法中调用，避免出现content为null的异常
-                PAGSdk.init(context, config, new PAGSdk.PAGInitCallback() {
-                    @Override
-                    public void success() {
-                        Log.d(TAG, "success");
+            //强烈建议在应用对应的Application#onCreate()方法中调用，避免出现content为null的异常
+            PAGSdk.init(context, config, new PAGSdk.PAGInitCallback() {
+                @Override
+                public void success() {
+                    Log.d(TAG, "success");
 //                        callInitSuccess();
-                    }
+                }
 
-                    @Override
-                    public void fail(int code, String msg) {
-                        Log.d(TAG, "fail:" + code + ":" + msg);
-                        callInitFail(code, msg);
-                    }
-                });
+                @Override
+                public void fail(int code, String msg) {
+                    Log.d(TAG, "fail:" + code + ":" + msg);
+                    callInitFail(code, msg);
+                }
+            });
 
-                callInitSuccess();
-            }
+            callInitSuccess();
         } catch (Throwable e) {
             e.printStackTrace();
             callInitFail(WindMillError.ERROR_AD_ADAPTER_LOAD.getErrorCode(), e.getMessage());

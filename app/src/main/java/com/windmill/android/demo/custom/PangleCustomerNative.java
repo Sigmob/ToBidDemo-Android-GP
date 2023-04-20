@@ -42,7 +42,7 @@ public class PangleCustomerNative extends WMCustomNativeAdapter implements Pangl
             /**
              * 只支持自渲染广告
              */
-            if (isExpressAd) {
+            if (!isExpressAd) {
                 ttNativeAdAdapter = new PangleNativeUnifiedAd(this, this);
             } else {
                 callLoadFail(new WMAdapterError(WindMillError.ERROR_AD_ADAPTER_LOAD.getErrorCode(), "not support expressAd"));
