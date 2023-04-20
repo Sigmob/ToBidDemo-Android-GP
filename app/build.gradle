@@ -70,6 +70,7 @@ dependencies {
 
     //admob
     implementation 'com.google.android.gms:play-services-ads:21.5.0'
+    implementation 'com.google.android.ads.consent:consent-library:1.0.6'
 
 
     //applovin
@@ -113,6 +114,6 @@ dependencies {
     implementation "com.mbridge.msdk.oversea:mbnative:16.4.11"
     implementation "com.mbridge.msdk.oversea:mbnativeadvanced:16.4.11"
     implementation "com.mbridge.msdk.oversea:mbbid:16.4.11"
-    
+
 }
 
